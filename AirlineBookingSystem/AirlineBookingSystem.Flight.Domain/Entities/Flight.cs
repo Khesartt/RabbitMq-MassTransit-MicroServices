@@ -12,5 +12,5 @@ public class Flight
 
     public DateTime ArrivalDate { get; set; }
 
-    public Guid DepartureDate { get; set; }
+    public DateTime DepartureDate { get; set; }
 }

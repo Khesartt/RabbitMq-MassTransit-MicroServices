@@ -1,7 +1,9 @@
+using AirlineBookingSystem.Flight.Application.Handlers;
 using AirlineBookingSystem.Flight.Domain.Repositories;
 using AirlineBookingSystem.Flight.InfraStructure.Persistances.SqlServer;
 using AirlineBookingSystem.Flight.InfraStructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 
+var assemblies = new Assembly[]
+{
+    Assembly.GetExecutingAssembly(),
+    typeof(GetAllFlightsHandlers).Assembly,
+    typeof(DeleteFlightHandler).Assembly,
+    typeof(CreateFlightHandler).Assembly
+};
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 
 builder.Services.AddDbContext<ApiContext>(options =>
 {

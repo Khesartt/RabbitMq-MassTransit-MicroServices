@@ -1,7 +1,9 @@
 using AirlineBookingSystem.Payment.Domain.Repositories;
 using AirlineBookingSystem.Payment.InfraStructure.Persistances.SqlServer;
 using AirlineBookingSystem.Payment.InfraStructure.Repositories;
+using AirlineBookingSystem.Payments.Application.Handlers;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+var assemblies = new Assembly[]
+{
+    Assembly.GetExecutingAssembly(),
+    typeof(ProcessPaymentHandler).Assembly,
+    typeof(RefundPaymentHandler).Assembly
+};
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 
 builder.Services.AddDbContext<ApiContext>(options =>
 {
