@@ -4,7 +4,7 @@ using AirlineBookingSystem.Booking.Domain.Entities;
 
 public interface IBookingRepository
 {
-    Task<Booking> GetBookingByIdAsync(Guid Id);
+    Task<Booking?> GetBookingByIdAsync(Guid Id);
 
     Task AddBookingAsync(Booking booking);
 }

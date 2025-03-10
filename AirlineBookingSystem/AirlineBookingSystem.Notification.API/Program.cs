@@ -1,3 +1,8 @@
+using AirlineBookingSystem.Notification.Domain.Repositories;
+using AirlineBookingSystem.Notification.InfraStructure.Persistances.SqlServer;
+using AirlineBookingSystem.Notification.InfraStructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+
+
+builder.Services.AddDbContext<ApiContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("defautlConnection");
+    options.UseSqlServer(connectionString);
+});
 
 var app = builder.Build();
 

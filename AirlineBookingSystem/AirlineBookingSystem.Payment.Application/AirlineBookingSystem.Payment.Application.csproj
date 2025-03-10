@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AirlineBookingSystem.Payment.Domain\AirlineBookingSystem.Payment.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

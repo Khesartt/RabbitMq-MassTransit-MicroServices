@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AirlineBookingSystem.Notification.Domain\AirlineBookingSystem.Notification.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
