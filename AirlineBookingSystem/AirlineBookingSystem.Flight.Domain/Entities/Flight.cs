@@ -10,7 +10,7 @@ public class Flight
 
     public string? Destination { get; set; }
 
-    public DateTime ArrivalDate { get; set; }
+    public DateTime ArrivalTime { get; set; }
 
-    public DateTime DepartureDate { get; set; }
+    public DateTime DepartureTime { get; set; }
 }

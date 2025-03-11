@@ -16,8 +16,8 @@ public class CreateFlightHandler(IFlightRepository flightRepository) : IRequestH
             FlightNumber = request.FlightNumber,
             Origin = request.Origin,
             Destination = request.Destination,
-            DepartureDate  = request.DepartureTime,
-            ArrivalDate = request.ArrivalTime
+            DepartureTime  = request.DepartureTime,
+            ArrivalTime = request.ArrivalTime
         };
 
         await this.flightRepository.AddFlightAsync(flight);
