@@ -5,9 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AirlineBookingSystem.Payment.InfraStructure\AirlineBookingSystem.Payment.InfraStructure.csproj" />
+    <ProjectReference Include="..\AirlineBookingSystem.Payment.Application\AirlineBookingSystem.Payment.Application.csproj" />
+    <ProjectReference Include="..\BuildingBlocks\AirlineBookingSystem.BuildingBlocks.csproj" />
   </ItemGroup>
 </Project>

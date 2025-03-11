@@ -7,10 +7,13 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MassTransit;
+using AirlineBookingSystem.BuildingBlocks.Contracts.EventBusMessages;
 
-public class ProcessPaymentHandler(IPaymentRepository paymentRepository) : IRequestHandler<ProcessPaymentCommand, Guid>
+public class ProcessPaymentHandler(IPaymentRepository paymentRepository, IPublishEndpoint publishEndpoint) : IRequestHandler<ProcessPaymentCommand, Guid>
 {
     private readonly IPaymentRepository paymentRepository = paymentRepository;
+    private readonly IPublishEndpoint publishEndpoint= publishEndpoint;
 
     public async Task<Guid> Handle(ProcessPaymentCommand request, CancellationToken cancellationToken)
     {
@@ -23,6 +26,15 @@ public class ProcessPaymentHandler(IPaymentRepository paymentRepository) : IRequ
         };
 
         await this.paymentRepository.ProcessPaymentAsync(payment);
+
+        // Publish PaymentProcessedEvent
+
+        await this.publishEndpoint.Publish<PaymentProcessedEvent>(new
+        {
+            BookingId = payment.BookingId,
+            PaymentId = payment.Id,
+            PaymentDate = payment.PaymentDate
+        });
 
         return payment.Id;
     }
