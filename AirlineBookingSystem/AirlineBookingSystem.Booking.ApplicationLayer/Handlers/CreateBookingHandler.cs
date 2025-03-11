@@ -2,6 +2,7 @@
 
 using AirlineBookingSystem.Booking.Application.Commands;
 using AirlineBookingSystem.Booking.Domain.Repositories;
+using AirlineBookingSystem.BuildingBlocks.Contracts.EventBusMessages;
 using MassTransit;
 using MediatR;
 
