@@ -1,10 +1,10 @@
+namespace AirlineBookingSystem.Notification.Application.Consumers;
+
 using AirlineBookingSystem.BuildingBlocks.Contracts.EventBusMessages;
 using AirlineBookingSystem.Notification.Application.Commands;
 using AirlineBookingSystem.Notification.Domain.Entities.Enums;
 using MassTransit;
-using MassTransit.Mediator;
-
-namespace AirlineBookingSystem.Notification.Application.Consumers;
+using MediatR;
 
 public class PaymentProcessedConsumer(IMediator mediator) : IConsumer<PaymentProcessedEvent>
 {

@@ -13,7 +13,7 @@ using AirlineBookingSystem.BuildingBlocks.Contracts.EventBusMessages;
 public class ProcessPaymentHandler(IPaymentRepository paymentRepository, IPublishEndpoint publishEndpoint) : IRequestHandler<ProcessPaymentCommand, Guid>
 {
     private readonly IPaymentRepository paymentRepository = paymentRepository;
-    private readonly IPublishEndpoint publishEndpoint= publishEndpoint;
+    private readonly IPublishEndpoint publishEndpoint = publishEndpoint;
 
     public async Task<Guid> Handle(ProcessPaymentCommand request, CancellationToken cancellationToken)
     {
@@ -29,12 +29,8 @@ public class ProcessPaymentHandler(IPaymentRepository paymentRepository, IPublis
 
         // Publish PaymentProcessedEvent
 
-        await this.publishEndpoint.Publish<PaymentProcessedEvent>(new
-        {
-            BookingId = payment.BookingId,
-            PaymentId = payment.Id,
-            PaymentDate = payment.PaymentDate
-        });
+
+            await this.publishEndpoint.Publish(new PaymentProcessedEvent(payment.Id, payment.BookingId, payment.Amount, payment.PaymentDate));
 
         return payment.Id;
     }
